@@ -1,0 +1,9 @@
+*.exe
+*/obj
+*/bin/Debug
+*/bin/*.dll
+*.exp
+*.opensdf
+*.ilk
+*.lib
+*.pdb
