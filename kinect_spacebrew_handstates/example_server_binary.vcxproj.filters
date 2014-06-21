@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\testApp.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\jsoncpp\jsoncpp.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Server.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Reactor.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Protocol.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Events.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Connection.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxLibwebsockets\libs\ofxLibwebsockets\src\Client.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxKinectV2\src\ofxKinectCommonBridge.cpp">
+      <Filter>ofxKinectv2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSpacebrew\src\ofxSpacebrew.cpp">
+      <Filter>ofxSpacebrew</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="..\..\..\addons\ofxKinectV2\src\ofxKinectCommonBridge.h">
+      <Filter>ofxKinectv2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxKinectV2\libs\KCBv2\include\KCBv2Lib.h">
+      <Filter>ofxKinectv2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSpacebrew\src\ofxSpacebrew.h">
+      <Filter>ofxSpacebrew</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ofxKinectv2">
+      <UniqueIdentifier>{609c6bb0-ccac-43f4-b4e3-ba5a6015f9b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxSpacebrew">
+      <UniqueIdentifier>{70c93042-bf2a-4cd0-8ade-e5f187b38c30}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
