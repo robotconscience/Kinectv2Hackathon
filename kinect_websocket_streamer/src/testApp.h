@@ -3,6 +3,8 @@
 #include "ofMain.h"
 
 #include "ofxKinectCommonBridge.h"
+#include "KinectMesh.h"
+
 #include "ofxLibwebsockets.h"
 
 #define NUM_MESSAGES 20 // how many past messages we want to keep
@@ -26,6 +28,7 @@ class testApp : public ofBaseApp{
 		
 		// KINECT stuff
 		
+		KinectMesh mesh;
 		ofxKinectCommonBridge kinect;
 		ofShader yuvRGBShader;
 		ofPlanePrimitive plane;

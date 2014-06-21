@@ -37,25 +37,31 @@ void testApp::setup(){
 	kinect.initDepthStream(true);
 	kinect.initBodyIndexStream();
 	kinect.initSkeletonStream(true);
+	kinect.setRawTextureUsesFloats(true);
+
+	kinect.setDepthClipping(200,1000);
 
 	//simple start
 	kinect.start();
 	ofDisableAlphaBlending(); //Kinect alpha channel is default 0;
+
+	mesh.setup(512, 424, kinect);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 	kinect.update();
 
-    if ( bSendImage && toLoad != "" ){
-        currentImage.loadImage( toLoad );
-        server.send( ofToString(currentImage.width) +":"+ ofToString( currentImage.height ) +":"+ ofToString( currentImage.type ) );
-        server.sendBinary( currentImage );
-        messages.push_back( "Sending image" );
-        bSendImage = false;
-        toLoad = "";
-    }
 
+}
+
+void meshToBuffer( ofMesh & m, string & buff ){
+	buff = ( ofToString(m.getNumVertices()) + ";" );
+	for ( auto & v : m.getVertices() ){
+		buff += ofToString(v.x) + ",";
+		buff += ofToString(v.y) + ",";
+		buff += ofToString(v.z) + ",";
+	}
 }
 
 //--------------------------------------------------------------
@@ -72,8 +78,13 @@ void testApp::draw(){
     if (currentImage.bAllocated()) currentImage.draw(0,0);
     ofDrawBitmapString("Drag an image onto the window to send!\nOpen your browser to localhost:9093 to receive", 20,20);
 	
+	string buff;
+	ofMesh m = mesh.getMeshCutoff();
+	meshToBuffer(m, buff);
+	server.send( buff );
 	
 	kinect.draw(0,0);
+	mesh.draw();
 
 	//kinect v2 outputs depth/ir resolution of 512x424
 	//kinect.drawDepth(0, ofGetHeight() - 424);
@@ -93,8 +104,7 @@ void testApp::onOpen( ofxLibwebsockets::Event& args ){
     
     // send the latest image if there is one!
     if ( currentImage.bAllocated() ){
-        args.conn.send( ofToString(currentImage.width) +":"+ ofToString( currentImage.height ) +":"+ ofToString( currentImage.type ) );
-        args.conn.sendBinary( currentImage );
+
     }
 }
 
@@ -120,11 +130,6 @@ void testApp::onMessage( ofxLibwebsockets::Event& args ){
     } else {
         messages.push_back("New message: " + args.message + " from " + args.conn.getClientName() );
     }
-    
-    //if (messages.size() > NUM_MESSAGES) messages.erase( messages.begin() );
-    
-    // echo server = send message right back!
-    args.conn.send( args.message );
 }
 
 //--------------------------------------------------------------
